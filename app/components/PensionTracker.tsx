@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import PensionForm, { type PensionFormProps } from "@/components/PensionForm";
-import { calculateTotalPensionTarget } from "@/lib/calculateTotalPensionTarget";
+import { calculateDesiredPensionLumpSum } from "@/lib/calculateDesiredPensionLumpSum";
 import { INTEREST_RATE, USER_AGE } from "@/lib/constants";
 import { calculatePensionGrowthSeries } from "@/lib/calculatePensionGrowthSeries";
+import PensionGrowthChart from "@/components/PensionGrowthChart";
 
 export default function PensionTracker(): React.JSX.Element {
   const [view, setView] = useState<"form" | "charts">("form");
@@ -19,7 +20,7 @@ export default function PensionTracker(): React.JSX.Element {
     currentPensionPots: [],
   });
 
-  const totalPensionTarget = calculateTotalPensionTarget(
+  const desiredPensionLumpSum = calculateDesiredPensionLumpSum(
     formValues.retirementIncomePerYear,
     INTEREST_RATE
   );
@@ -29,9 +30,6 @@ export default function PensionTracker(): React.JSX.Element {
     INTEREST_RATE,
     USER_AGE
   );
-
-  console.log(totalPensionTarget);
-  console.log(pensionGrowthSeriesData);
 
   const handleSubmit = (data: PensionFormProps["defaultValues"]) => {
     setFormValues(data);
@@ -43,7 +41,18 @@ export default function PensionTracker(): React.JSX.Element {
       {view == "form" ? (
         <PensionForm defaultValues={formValues} onSubmit={handleSubmit} />
       ) : (
-        <button onClick={() => setView("form")}>← Edit pension 🐿️</button>
+        <>
+          <button onClick={() => setView("form")}>← Edit pension 🐿️</button>
+
+          <div className="grid gap-4 w-[50vw]">
+            <h2 className="text-2xl font-bold">Pension Growth</h2>
+            <PensionGrowthChart
+              data={pensionGrowthSeriesData}
+              desiredPensionLumpSum={desiredPensionLumpSum}
+              retirementAge={formValues.retirementAge}
+            />
+          </div>
+        </>
       )}
     </div>
   );

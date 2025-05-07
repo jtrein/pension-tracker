@@ -2,7 +2,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormField from "@/components/ui/FormField";
-import { MIN_RETIREMENT_AGE } from "@/lib/constants";
+import { MAX_RETIREMENT_AGE, MIN_RETIREMENT_AGE } from "@/lib/constants";
 import { PensionFormValues } from "@/types";
 
 export type PensionFormProps = {
@@ -45,6 +45,7 @@ const PensionFormSchema = z.object({
     z
       .number(MUST_BE_NUMBER_ERROR)
       .gte(MIN_RETIREMENT_AGE, getGteErrorMessage(MIN_RETIREMENT_AGE))
+      .lte(MAX_RETIREMENT_AGE, getGteErrorMessage(MAX_RETIREMENT_AGE))
   ),
   currentPensionPots: z.array(CurentPensionPotsSchema),
 });
