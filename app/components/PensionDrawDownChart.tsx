@@ -9,11 +9,11 @@ import {
   ReferenceLine,
 } from "recharts";
 
-export interface PensionDrawdownChartProps {
+type PensionDrawdownChartProps = {
   data: { age: number; balance: number }[];
-}
+};
 
-export function PensionDrawdownChart({
+export default function PensionDrawdownChart({
   data,
 }: Readonly<PensionDrawdownChartProps>): React.JSX.Element {
   return (
