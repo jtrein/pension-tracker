@@ -83,7 +83,7 @@ export default function PensionForm({
 
   return (
     <form aria-label="Pension Form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-y-2 w-screen">
+      <div className="flex flex-col gap-y-2">
         <div className="w-fit flex flex-col gap-y-2">
           <FormField
             label="Annual income you want in retirement"
@@ -123,7 +123,7 @@ export default function PensionForm({
         <div className="flex flex-col gap-y-2">
           {currentPotsFields.map((item, i) => (
             <div key={item.id}>
-              <div className="flex gap-x-4">
+              <div className="flex w-fit flex-col gap-y-2 sm:flex-row gap-x-4 sm:gap-y-0">
                 {/* Don't display to user or assistive users */}
                 <div className="hidden">
                   <FormField
