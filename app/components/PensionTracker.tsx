@@ -65,7 +65,7 @@ export default function PensionTracker(): React.JSX.Element {
             Edit pension 🐿️
           </button>
 
-          <div className="grid gap-4 w-[50vw]">
+          <div className="grid gap-4 lg:w-[50vw]">
             <h2 className="text-2xl font-bold">
               Pension growth until retirement
             </h2>

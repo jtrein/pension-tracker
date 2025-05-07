@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceArea,
+  Legend,
 } from "recharts";
 
 type PensionGrowthChartProps = {
@@ -51,6 +52,7 @@ export default function PensionGrowthChart({
         <Area
           type="monotone"
           dataKey="balance"
+          name="Projected"
           stroke="#82ca9d"
           fill="#82ca9d"
         />
@@ -60,10 +62,12 @@ export default function PensionGrowthChart({
           type="monotone"
           dataKey={() => desiredPensionLumpSum}
           stroke="#FFA500"
-          label="Desired Pension"
+          name="Desired"
           dot={false}
           strokeDasharray="5 5"
         />
+
+        <Legend verticalAlign="top" />
       </ComposedChart>
     </ResponsiveContainer>
   );
