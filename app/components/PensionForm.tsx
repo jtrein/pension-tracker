@@ -39,6 +39,31 @@ export default function PensionForm(): React.JSX.Element {
         errorMessage=""
         placeholder="55"
       />
+
+      <div>
+        <FormField
+          name="currentPotProviderName"
+          label="Provider Name"
+          type="text"
+          errorMessage=""
+          placeholder="Aviva"
+        />
+        <FormField
+          name="currentPotValue"
+          label="Current Value"
+          type="number"
+          min="1"
+          step={"0.01"}
+          placeholder="10000"
+          errorMessage=""
+        />
+
+        <button onClick={() => {}}>✕</button>
+      </div>
+
+      <button type="button" onClick={() => {}}>
+        Add a current pension
+      </button>
     </form>
   );
 }
