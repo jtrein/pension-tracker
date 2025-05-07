@@ -8,6 +8,13 @@ import { INTEREST_RATE, LIFE_EXPECTANCY } from "./constants";
  *
  * ```
  * After withdrawing the balance will still grow at the annual `INTEREST_RATE`.
+ *
+ * @param startingBalance - Initial balance at retirement age
+ * @param retirementAge - Age at which the user plans to retire
+ * @param desiredIncomePerYear - Desired income per year
+ * @param lifeExpectancy - Expected lifespan of the user
+ * @param annualRate - Annual growth rate of the pension pots
+ * @returns Array of objects containing the age and balance at that age
  */
 export function calculatePensionDrawdownSeries(
   startingBalance: number,

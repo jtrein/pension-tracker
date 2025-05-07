@@ -1,10 +1,10 @@
 import { INTEREST_RATE } from "./constants";
 
 /**
- * Lump sum desired at retirement
+ * Calculates lump sum desired at retirement
  *
  * @param desiredIncomePerYear - Desired income per year in retirement
- * @param annualRate - Annual interest rate (default is INTEREST_RATE)
+ * @param annualRate - Annual interest rate (default is `INTEREST_RATE`)
  * @returns Lump sum required at retirement
  * @throws Error if annualRate is less than or equal to 0
  */

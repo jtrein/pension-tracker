@@ -1,6 +1,8 @@
 import type { CurrentPensionPot, PensionFormValues } from "../types";
 import { INTEREST_RATE, USER_AGE } from "./constants";
 
+type GrowthSeriesData = { age: number; balance: number };
+
 /**
  * Returns one data‐point per year from age USER_AGE → retirement age:
  * ```
@@ -10,6 +12,11 @@ import { INTEREST_RATE, USER_AGE } from "./constants";
  * `balance` includes
  * - all existing pots grown at rate
  * - all monthly contributions grown at rate
+ *
+ * @param PensionFormValues - Object containing pension form values`
+ * @param annualRate - Annual growth rate of the pension pots
+ * @param startAge - Current age of the user
+ * @returns Array of objects containing the age and balance at that age
  */
 export function calculatePensionGrowthSeries(
   {
@@ -20,8 +27,8 @@ export function calculatePensionGrowthSeries(
   }: PensionFormValues,
   annualRate: number = INTEREST_RATE,
   startAge = USER_AGE
-): Array<{ age: number; balance: number }> {
-  const years: { age: number; balance: number }[] = [];
+): GrowthSeriesData[] {
+  const years: GrowthSeriesData[] = [];
 
   let currentPotsBalance: number = currentPensionPots.reduce(
     (sum: number, p: CurrentPensionPot) => sum + p.currentPotValue,
