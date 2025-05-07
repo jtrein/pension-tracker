@@ -48,13 +48,22 @@ export default function PensionTracker(): React.JSX.Element {
     setView("charts");
   };
 
+  const handleEdit = () => {
+    setView("form");
+  };
+
   return (
     <div>
       {view == "form" ? (
         <PensionForm defaultValues={formValues} onSubmit={handleSubmit} />
       ) : (
         <>
-          <button onClick={() => setView("form")}>← Edit pension 🐿️</button>
+          <button
+            className="mb-12 bg-blue-200 text-black text-xl font-semibold ring-2 ring-inset ring-slate-600 rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-200/90"
+            onClick={handleEdit}
+          >
+            Edit pension 🐿️
+          </button>
 
           <div className="grid gap-4 w-[50vw]">
             <h2 className="text-2xl font-bold">

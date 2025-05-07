@@ -25,14 +25,16 @@ export default function FormField<C extends React.ElementType = typeof Input>({
   } & React.ComponentProps<C>
 >): React.JSX.Element {
   return (
-    <div className="form-field">
-      <label htmlFor={name}>{label}</label>
+    <div className="flex flex-col gap-y-1">
+      <label htmlFor={name}>
+        <span className="font-semibold">{label}</span>
+      </label>
 
       {/* Need to keep `name` and `id` for react-hook-form and label */}
       <Component id={name} name={name} {...rest} />
 
       {errorMessage && (
-        <p role="alert" className="text-rose-400">
+        <p role="alert" className="text-rose-400 text-sm">
           {errorMessage}
         </p>
       )}

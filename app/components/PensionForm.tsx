@@ -83,85 +83,112 @@ export default function PensionForm({
 
   return (
     <form aria-label="Pension Form" onSubmit={handleSubmit(onSubmit)}>
-      <FormField
-        label="Annual income you want in retirement"
-        errorMessage={errors.retirementIncomePerYear?.message}
-        type="number"
-        placeholder="30000"
-        {...register("retirementIncomePerYear")}
-      />
-      <FormField
-        label="Employer monthly contribution"
-        type="number"
-        errorMessage={errors.employerMonthlyContribution?.message}
-        placeholder="400"
-        {...register("employerMonthlyContribution")}
-      />
-      <FormField
-        label="Your monthly contribution"
-        type="number"
-        errorMessage={errors.employeeMonthlyContribution?.message}
-        placeholder="1000"
-        {...register("employeeMonthlyContribution")}
-      />
-      <FormField
-        label="Retirement age"
-        type="number"
-        errorMessage={errors.retirementAge?.message}
-        placeholder="55"
-        {...register("retirementAge")}
-      />
+      <div className="flex flex-col gap-y-2 w-screen">
+        <div className="w-fit flex flex-col gap-y-2">
+          <FormField
+            label="Annual income you want in retirement"
+            errorMessage={errors.retirementIncomePerYear?.message}
+            type="number"
+            placeholder="30000"
+            className="w-1/2"
+            {...register("retirementIncomePerYear")}
+          />
+          <FormField
+            label="Employer monthly contribution"
+            type="number"
+            errorMessage={errors.employerMonthlyContribution?.message}
+            placeholder="400"
+            className="w-1/2"
+            {...register("employerMonthlyContribution")}
+          />
+          <FormField
+            label="Your monthly contribution"
+            type="number"
+            errorMessage={errors.employeeMonthlyContribution?.message}
+            placeholder="1000"
+            className="w-1/2"
+            {...register("employeeMonthlyContribution")}
+          />
+          <FormField
+            label="Retirement age"
+            type="number"
+            errorMessage={errors.retirementAge?.message}
+            placeholder="55"
+            className="w-1/3"
+            {...register("retirementAge")}
+          />
+        </div>
 
-      <div>
-        <div>
+        {/* Current pensions */}
+        <div className="flex flex-col gap-y-2">
           {currentPotsFields.map((item, i) => (
             <div key={item.id}>
-              {/* Don't display to user or assistive users */}
-              <div className="hidden">
+              <div className="flex gap-x-4">
+                {/* Don't display to user or assistive users */}
+                <div className="hidden">
+                  <FormField
+                    label="Current Pot ID"
+                    type="text"
+                    errorMessage={
+                      errors.currentPensionPots?.[i]?.currentPotId?.message
+                    }
+                    placeholder="123e4567-e89b-12d3-a456-426614174000"
+                    aria-hidden="true"
+                    {...register(`currentPensionPots.${i}.currentPotId`)}
+                  />
+                </div>
+
                 <FormField
-                  label="Current Pot ID"
+                  label="Provider Name"
                   type="text"
                   errorMessage={
-                    errors.currentPensionPots?.[i]?.currentPotId?.message
+                    errors.currentPensionPots?.[i]?.currentPotProviderName
+                      ?.message
                   }
-                  placeholder="123e4567-e89b-12d3-a456-426614174000"
-                  {...register(`currentPensionPots.${i}.currentPotId`)}
-                  aria-hidden="true"
+                  placeholder="Aviva"
+                  {...register(
+                    `currentPensionPots.${i}.currentPotProviderName`
+                  )}
+                />
+
+                <FormField
+                  label="Current Value"
+                  type="number"
+                  placeholder="10000"
+                  errorMessage={
+                    errors.currentPensionPots?.[i]?.currentPotValue?.message
+                  }
+                  className="w-1/2"
+                  {...register(`currentPensionPots.${i}.currentPotValue`)}
                 />
               </div>
-              <FormField
-                label="Provider Name"
-                type="text"
-                errorMessage={
-                  errors.currentPensionPots?.[i]?.currentPotProviderName
-                    ?.message
-                }
-                placeholder="Aviva"
-                {...register(`currentPensionPots.${i}.currentPotProviderName`)}
-              />
-              <FormField
-                label="Current Value"
-                type="number"
-                placeholder="10000"
-                errorMessage={
-                  errors.currentPensionPots?.[i]?.currentPotValue?.message
-                }
-                {...register(`currentPensionPots.${i}.currentPotValue`)}
-              />
 
-              <button type="button" onClick={() => remove(i)}>
-                ✕
+              <button
+                className="mt-2 cursor-pointer text-sm font-bold text-white/60 hover:text-rose-500"
+                type="button"
+                onClick={() => remove(i)}
+              >
+                🗑️ delete
               </button>
             </div>
           ))}
         </div>
 
-        <button type="button" onClick={addCurrentPensionPot}>
-          + Add a current pension
+        <button
+          className="w-fit mt-4 text-sm ring-1 ring-inset ring-white/50 rounded-lg py-2 px-4 cursor-pointer hover:bg-slate-200/20"
+          type="button"
+          onClick={addCurrentPensionPot}
+        >
+          + Add current pension
         </button>
       </div>
 
-      <button type="submit">Calculate pension! 🐿️</button>
+      <button
+        className="mt-12 bg-blue-200 text-black text-xl font-semibold ring-2 ring-inset ring-slate-600 rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-200/90"
+        type="submit"
+      >
+        Calculate pension! 🐿️
+      </button>
     </form>
   );
 }
