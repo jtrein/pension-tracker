@@ -3,24 +3,11 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormField from "@/components/ui/FormField";
 import { MIN_RETIREMENT_AGE } from "@/lib/constants";
-
-type CurrentPensionPot = {
-  currentPotId: string;
-  currentPotValue: number;
-  currentPotProviderName: string;
-};
-
-type FormValues = {
-  retirementIncomePerYear: number;
-  employerMonthlyContribution: number;
-  employeeMonthlyContribution: number;
-  retirementAge: number;
-  currentPensionPots: CurrentPensionPot[];
-};
+import { PensionFormValues } from "@/types";
 
 export type PensionFormProps = {
-  defaultValues: FormValues;
-  onSubmit: (data: FormValues) => void;
+  defaultValues: PensionFormValues;
+  onSubmit: (data: PensionFormValues) => void;
 };
 
 const parseAsNumber = (value: unknown) =>
@@ -171,7 +158,7 @@ export default function PensionForm({
         </button>
       </div>
 
-      <button type="submit">🐿️ Calculate pension!</button>
+      <button type="submit">Calculate pension! 🐿️</button>
     </form>
   );
 }
