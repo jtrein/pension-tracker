@@ -3,11 +3,11 @@
 import { useState } from "react";
 import PensionForm, { type PensionFormProps } from "@/components/PensionForm";
 import { calculateDesiredPensionLumpSum } from "@/lib/calculateDesiredPensionLumpSum";
-import { INTEREST_RATE, USER_AGE } from "@/lib/constants";
 import { calculatePensionGrowthSeries } from "@/lib/calculatePensionGrowthSeries";
 import PensionGrowthChart from "@/components/PensionGrowthChart";
 import { calculatePensionDrawdownSeries } from "@/lib/calculatePensionDrawdownSeries";
 import { PensionDrawdownChart } from "./PensionDrawDownChart";
+import { calculateCurrentPotsFutureValue } from "@/lib/calculateCurrentPotsFutureValue";
 
 export default function PensionTracker(): React.JSX.Element {
   const [view, setView] = useState<"form" | "charts">("form");
@@ -23,20 +23,21 @@ export default function PensionTracker(): React.JSX.Element {
   });
 
   const desiredPensionLumpSum = calculateDesiredPensionLumpSum(
-    formValues.retirementIncomePerYear,
-    INTEREST_RATE
+    formValues.retirementIncomePerYear
   );
 
-  const pensionGrowthSeriesData = calculatePensionGrowthSeries(
-    formValues,
-    INTEREST_RATE,
-    USER_AGE
-  );
+  const pensionGrowthSeriesData = calculatePensionGrowthSeries(formValues);
 
   const retireBalance = pensionGrowthSeriesData.at(-1)?.balance ?? 0;
 
   const pensionDrawdownSeriesData = calculatePensionDrawdownSeries(
     retireBalance,
+    formValues.retirementAge,
+    formValues.retirementIncomePerYear
+  );
+
+  const currentPotsFutureValue = calculateCurrentPotsFutureValue(
+    formValues.currentPensionPots,
     formValues.retirementAge,
     formValues.retirementIncomePerYear
   );
