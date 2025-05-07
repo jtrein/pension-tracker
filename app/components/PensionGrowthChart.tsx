@@ -1,5 +1,7 @@
 import { USER_AGE } from "@/lib/constants";
-import formatCurrency from "@/lib/helpers/formatCurrency";
+import formatCurrency, {
+  formatCurrencyShort,
+} from "@/lib/helpers/formatCurrency";
 import {
   ComposedChart,
   Line,
@@ -34,7 +36,7 @@ export default function PensionGrowthChart({
         margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
       >
         <XAxis dataKey="age" />
-        <YAxis tickFormatter={formatCurrency} />
+        <YAxis tickFormatter={formatCurrencyShort} />
         <Tooltip formatter={formatCurrency} />
 
         {/* Background shading */}

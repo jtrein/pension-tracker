@@ -1,4 +1,5 @@
-import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
+import { formatCurrencyShort } from "@/lib/helpers/formatCurrency";
+import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 type CurrentPotsFutureValueChartProps = {
   data: { name: string; value: number }[];
@@ -30,13 +31,12 @@ export default function CurrentPotsFutureValueChart({
           cy="50%"
           innerRadius={50}
           outerRadius={80}
-          label
+          label={({ name, value }) => `${name}: ${formatCurrencyShort(value)}`}
         >
           {data.map((_, i) => (
             <Cell key={i} fill={getRandomColor()} />
           ))}
         </Pie>
-        <Legend verticalAlign="bottom" height={24} />
       </PieChart>
     </ResponsiveContainer>
   );

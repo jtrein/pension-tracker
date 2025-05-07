@@ -59,7 +59,7 @@ export default function PensionTracker(): React.JSX.Element {
       ) : (
         <>
           <button
-            className="mb-12 bg-blue-200 text-black text-xl font-semibold ring-2 ring-inset ring-slate-600 rounded-lg py-2 px-6 cursor-pointer hover:bg-blue-200/90"
+            className="mb-12 bg-blue-200 text-black text-base font-semibold ring-2 ring-inset ring-slate-600 rounded-lg py-1 px-5 cursor-pointer hover:bg-blue-200/90"
             onClick={handleEdit}
           >
             Edit pension 🐿️
@@ -83,7 +83,7 @@ export default function PensionTracker(): React.JSX.Element {
             {formValues.currentPensionPots.length > 0 && (
               <>
                 <h2 className="text-2xl font-bold">
-                  Current pots future value
+                  Future value of current pension pots
                 </h2>
                 <CurrentPotsFutureValueChart data={currentPotsFutureValue} />
               </>

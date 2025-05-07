@@ -175,7 +175,7 @@ export default function PensionForm({
         </div>
 
         <button
-          className="w-fit mt-4 text-sm ring-1 ring-inset ring-white/50 rounded-lg py-2 px-4 cursor-pointer hover:bg-slate-200/20"
+          className="w-fit font-semibold mt-4 text-sm ring-1 ring-inset ring-white/50 rounded-lg py-2 px-4 cursor-pointer hover:bg-slate-200/20"
           type="button"
           onClick={addCurrentPensionPot}
         >
