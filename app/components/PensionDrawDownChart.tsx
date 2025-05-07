@@ -19,7 +19,11 @@ export default function PensionDrawdownChart({
   data,
 }: Readonly<PensionDrawdownChartProps>): React.JSX.Element {
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer
+      width="100%"
+      height={250}
+      aria-label="Pension drawdown chart"
+    >
       <AreaChart
         data={data}
         margin={{ top: 20, right: 30, left: 20, bottom: 20 }}

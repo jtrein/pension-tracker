@@ -16,6 +16,16 @@ vi.mock("next/font/google", () => {
   };
 });
 
+// Stub out ResizeObserver
+vi.stubGlobal(
+  "ResizeObserver",
+  class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+);
+
 afterEach(() => {
   cleanup();
 });

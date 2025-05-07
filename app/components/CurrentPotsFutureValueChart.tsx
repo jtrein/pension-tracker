@@ -21,7 +21,11 @@ export default function CurrentPotsFutureValueChart({
   data,
 }: Readonly<CurrentPotsFutureValueChartProps>) {
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <ResponsiveContainer
+      width="100%"
+      height={200}
+      aria-label="Future value of current pensions chart and amount left to save"
+    >
       <PieChart>
         <Pie
           data={data}

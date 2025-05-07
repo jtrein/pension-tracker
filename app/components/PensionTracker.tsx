@@ -61,6 +61,7 @@ export default function PensionTracker(): React.JSX.Element {
           <button
             className="mb-12 bg-blue-200 text-black text-base font-semibold ring-2 ring-inset ring-slate-600 rounded-lg py-1 px-5 cursor-pointer hover:bg-blue-200/90"
             onClick={handleEdit}
+            type="button"
           >
             Edit pension 🐿️
           </button>
