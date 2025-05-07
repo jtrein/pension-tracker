@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+## Running locally
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running tests
+```bash
+npm test
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Some notes on what I think is important, given more time
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Thanks for reviewing the assessment! It was fun to work on focusing what's vital in a limited span of time. I believe I was able to finsh the entire core of the task, with the *Stretch* items. Below are some items, with respect to the time alotted that I'd try and implement as I believe they're important.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Form fields
+  - Prepended and styled £ symbol for currency inset on `<input type="number">`. These guide the user in what to expect.
+  - Formatting constraints on input for the number inputs for easy reading:
+    - `10000.5055` -> `10,000.51`
+  - Remove default `0` values on number inputs and let the `placeholder`s be visible so the users can see exanple text
+  - Assistive: Add `aria-invalid`, `aria-describedby` (mapping to error text) on inputs for accessible field errors
+  - Clear CSS transitions on background and `box-shadow` attributes to help give the user clues something is active under the mouse
+- Charts:
+  - Accessibile labels (at least) for charts for assistive tech and easier testing.
+  - A grid layout with 2 charts per row
+  - Graphs inside bounded "cards" with some depth (e.g. slight shadow)
+  - Improve styling of tooltip labels: The x axis value is too light on a white background.
+  - Use colours which play well with one another
+- Tests: I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
+  - Write unit tests for each `lib` function
+  - Write unit tests for each component
+  - Write component integration tests from a higher component level in the tree (e.g. `page.tsx`)
