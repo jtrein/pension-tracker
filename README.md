@@ -11,6 +11,9 @@ npm test
 ```
 
 ## What I'd do next
+### Calculations for chart data
+- Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, it's generally cleaner to run them only when needed.
+
 ### Write more comprehensive tests
 I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
   - Write unit tests for each `lib` function
