@@ -1,16 +1,21 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormField from "@/components/ui/FormField";
 import { MIN_RETIREMENT_AGE } from "@/lib/constants";
+
+type CurrentPensionPot = {
+  currentPotId: string;
+  currentPotValue: number;
+  currentPotProviderName: string;
+};
 
 type FormValues = {
   retirementIncomePerYear: number;
   employerMonthlyContribution: number;
   employeeMonthlyContribution: number;
   retirementAge: number;
-  currentPotProviderName: string;
-  currentPotValue: number;
+  currentPensionPots: CurrentPensionPot[];
 };
 
 export type PensionFormProps = {
@@ -25,6 +30,15 @@ const MUST_BE_NUMBER_ERROR = { invalid_type_error: "Value must be a number" };
 
 const getGteErrorMessage = (value: number) =>
   `Value must be greater than or equal to ${value}`;
+
+const CurentPensionPotsSchema = z.object({
+  currentPotId: z.string().uuid("Invalid UUID"),
+  currentPotProviderName: z.string().min(1, "Provider name is required"),
+  currentPotValue: z.preprocess(
+    parseAsNumber,
+    z.number(MUST_BE_NUMBER_ERROR).gte(1, getGteErrorMessage(1))
+  ),
+});
 
 const PensionFormSchema = z.object({
   retirementIncomePerYear: z.preprocess(
@@ -45,11 +59,7 @@ const PensionFormSchema = z.object({
       .number(MUST_BE_NUMBER_ERROR)
       .gte(MIN_RETIREMENT_AGE, getGteErrorMessage(MIN_RETIREMENT_AGE))
   ),
-  currentPotProviderName: z.string().min(1, "Provider name is required"),
-  currentPotValue: z.preprocess(
-    parseAsNumber,
-    z.number(MUST_BE_NUMBER_ERROR).gte(1, getGteErrorMessage(1))
-  ),
+  currentPensionPots: z.array(CurentPensionPotsSchema),
 });
 
 export default function PensionForm({
@@ -57,6 +67,7 @@ export default function PensionForm({
   onSubmit,
 }: Readonly<PensionFormProps>): React.JSX.Element {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -64,6 +75,23 @@ export default function PensionForm({
     defaultValues,
     resolver: zodResolver(PensionFormSchema),
   });
+
+  const {
+    fields: currentPotsFields,
+    append,
+    remove,
+  } = useFieldArray({
+    name: "currentPensionPots",
+    control,
+  });
+
+  const addCurrentPensionPot = () => {
+    append({
+      currentPotId: crypto.randomUUID(),
+      currentPotValue: 0,
+      currentPotProviderName: "",
+    });
+  };
 
   return (
     <form aria-label="Pension Form" onSubmit={handleSubmit(onSubmit)}>
@@ -98,26 +126,48 @@ export default function PensionForm({
 
       <div>
         <div>
-          <FormField
-            label="Provider Name"
-            type="text"
-            errorMessage={errors.currentPotProviderName?.message}
-            placeholder="Aviva"
-            {...register("currentPotProviderName")}
-          />
-          <FormField
-            label="Current Value"
-            type="number"
-            placeholder="10000"
-            errorMessage={errors.currentPotValue?.message}
-            {...register("currentPotValue")}
-          />
+          {currentPotsFields.map((item, i) => (
+            <div key={item.id}>
+              <FormField
+                label="Current Pot ID"
+                type="text"
+                errorMessage={
+                  errors.currentPensionPots?.[i]?.currentPotId?.message
+                }
+                placeholder="123e4567-e89b-12d3-a456-426614174000"
+                {...register(`currentPensionPots.${i}.currentPotId`)}
+                aria-hidden="true"
+                className="hidden"
+              />
+              <FormField
+                label="Provider Name"
+                type="text"
+                errorMessage={
+                  errors.currentPensionPots?.[i]?.currentPotProviderName
+                    ?.message
+                }
+                placeholder="Aviva"
+                {...register(`currentPensionPots.${i}.currentPotProviderName`)}
+              />
+              <FormField
+                label="Current Value"
+                type="number"
+                placeholder="10000"
+                errorMessage={
+                  errors.currentPensionPots?.[i]?.currentPotValue?.message
+                }
+                {...register(`currentPensionPots.${i}.currentPotValue`)}
+              />
 
-          <button onClick={() => {}}>✕</button>
+              <button type="button" onClick={() => remove(i)}>
+                ✕
+              </button>
+            </div>
+          ))}
         </div>
 
-        <button type="button" onClick={() => {}}>
-          Add a current pension
+        <button type="button" onClick={addCurrentPensionPot}>
+          + Add a current pension
         </button>
       </div>
 

@@ -13,8 +13,7 @@ export default function PensionTracker(): React.JSX.Element {
     employerMonthlyContribution: 0,
     employeeMonthlyContribution: 0,
     retirementAge: 0,
-    currentPotProviderName: "",
-    currentPotValue: 0,
+    currentPensionPots: [],
   });
 
   const handleSubmit = (data: PensionFormProps["defaultValues"]) => {

@@ -16,12 +16,14 @@ export default function FormField<C extends React.ElementType = typeof Input>({
   errorMessage,
   as: Component = Input,
   ...rest
-}: {
-  name: string;
-  label: string;
-  errorMessage?: string;
-  as?: C;
-} & React.ComponentProps<C>): React.JSX.Element {
+}: Readonly<
+  {
+    name: string;
+    label: string;
+    errorMessage?: string;
+    as?: C;
+  } & React.ComponentProps<C>
+>): React.JSX.Element {
   return (
     <div className="form-field">
       <label htmlFor={name}>{label}</label>
