@@ -116,17 +116,19 @@ export default function PensionForm({
         <div>
           {currentPotsFields.map((item, i) => (
             <div key={item.id}>
-              <FormField
-                label="Current Pot ID"
-                type="text"
-                errorMessage={
-                  errors.currentPensionPots?.[i]?.currentPotId?.message
-                }
-                placeholder="123e4567-e89b-12d3-a456-426614174000"
-                {...register(`currentPensionPots.${i}.currentPotId`)}
-                aria-hidden="true"
-                className="hidden"
-              />
+              {/* Don't display to user or assistive users */}
+              <div className="hidden">
+                <FormField
+                  label="Current Pot ID"
+                  type="text"
+                  errorMessage={
+                    errors.currentPensionPots?.[i]?.currentPotId?.message
+                  }
+                  placeholder="123e4567-e89b-12d3-a456-426614174000"
+                  {...register(`currentPensionPots.${i}.currentPotId`)}
+                  aria-hidden="true"
+                />
+              </div>
               <FormField
                 label="Provider Name"
                 type="text"
