@@ -6,6 +6,8 @@ import { calculateDesiredPensionLumpSum } from "@/lib/calculateDesiredPensionLum
 import { INTEREST_RATE, USER_AGE } from "@/lib/constants";
 import { calculatePensionGrowthSeries } from "@/lib/calculatePensionGrowthSeries";
 import PensionGrowthChart from "@/components/PensionGrowthChart";
+import { calculatePensionDrawdownSeries } from "@/lib/calculatePensionDrawdownSeries";
+import { PensionDrawdownChart } from "./PensionDrawDownChart";
 
 export default function PensionTracker(): React.JSX.Element {
   const [view, setView] = useState<"form" | "charts">("form");
@@ -31,6 +33,14 @@ export default function PensionTracker(): React.JSX.Element {
     USER_AGE
   );
 
+  const retireBalance = pensionGrowthSeriesData.at(-1)?.balance ?? 0;
+
+  const pensionDrawdownSeriesData = calculatePensionDrawdownSeries(
+    retireBalance,
+    formValues.retirementAge,
+    formValues.retirementIncomePerYear
+  );
+
   const handleSubmit = (data: PensionFormProps["defaultValues"]) => {
     setFormValues(data);
     setView("charts");
@@ -45,12 +55,21 @@ export default function PensionTracker(): React.JSX.Element {
           <button onClick={() => setView("form")}>← Edit pension 🐿️</button>
 
           <div className="grid gap-4 w-[50vw]">
-            <h2 className="text-2xl font-bold">Pension Growth</h2>
+            <h2 className="text-2xl font-bold">
+              Pension growth until retirement
+            </h2>
+
             <PensionGrowthChart
               data={pensionGrowthSeriesData}
               desiredPensionLumpSum={desiredPensionLumpSum}
               retirementAge={formValues.retirementAge}
             />
+
+            <h2 className="text-2xl font-bold">
+              Pension drawdown in retirement
+            </h2>
+
+            <PensionDrawdownChart data={pensionDrawdownSeriesData} />
           </div>
         </>
       )}

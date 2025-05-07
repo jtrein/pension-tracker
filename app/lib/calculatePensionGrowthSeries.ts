@@ -2,7 +2,7 @@ import type { CurrentPensionPot, PensionFormValues } from "../types";
 import { INTEREST_RATE, USER_AGE } from "./constants";
 
 /**
- * Returns one data‐point per year from age 25 → retirementAge:
+ * Returns one data‐point per year from age USER_AGE → retirement age:
  * ```
  * { age: number, balance: number }
  *
