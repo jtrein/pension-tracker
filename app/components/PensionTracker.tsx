@@ -6,8 +6,9 @@ import { calculateDesiredPensionLumpSum } from "@/lib/calculateDesiredPensionLum
 import { calculatePensionGrowthSeries } from "@/lib/calculatePensionGrowthSeries";
 import PensionGrowthChart from "@/components/PensionGrowthChart";
 import { calculatePensionDrawdownSeries } from "@/lib/calculatePensionDrawdownSeries";
-import { PensionDrawdownChart } from "./PensionDrawDownChart";
+import PensionDrawdownChart from "./PensionDrawDownChart";
 import { calculateCurrentPotsFutureValue } from "@/lib/calculateCurrentPotsFutureValue";
+import CurrentPotsFutureValueChart from "@/components/CurrentPotsFutureValueChart";
 
 export default function PensionTracker(): React.JSX.Element {
   const [view, setView] = useState<"form" | "charts">("form");
@@ -59,7 +60,6 @@ export default function PensionTracker(): React.JSX.Element {
             <h2 className="text-2xl font-bold">
               Pension growth until retirement
             </h2>
-
             <PensionGrowthChart
               data={pensionGrowthSeriesData}
               desiredPensionLumpSum={desiredPensionLumpSum}
@@ -69,8 +69,16 @@ export default function PensionTracker(): React.JSX.Element {
             <h2 className="text-2xl font-bold">
               Pension drawdown in retirement
             </h2>
-
             <PensionDrawdownChart data={pensionDrawdownSeriesData} />
+
+            {formValues.currentPensionPots.length > 0 && (
+              <>
+                <h2 className="text-2xl font-bold">
+                  Current pots future value
+                </h2>
+                <CurrentPotsFutureValueChart data={currentPotsFutureValue} />
+              </>
+            )}
           </div>
         </>
       )}
