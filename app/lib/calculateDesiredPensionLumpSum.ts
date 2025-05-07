@@ -8,7 +8,7 @@ import { INTEREST_RATE } from "./constants";
  * @returns Lump sum required at retirement
  * @throws Error if annualRate is less than or equal to 0
  */
-export function calculateTotalPensionTarget(
+export function calculateDesiredPensionLumpSum(
   desiredIncomePerYear: number,
   annualRate: number = INTEREST_RATE
 ): number {
