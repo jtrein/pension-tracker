@@ -11,7 +11,8 @@ npm test
 ```
 
 ## What I'd do next
-- Tests: I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
+### Write more comprehensive tests
+I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
   - Write unit tests for each `lib` function
   - Write unit tests for each component
   - Write component integration tests from a higher component level in the tree (e.g. `page.tsx`)
