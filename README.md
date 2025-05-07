@@ -28,7 +28,7 @@ Thanks for reviewing the assessment! It was fun to work on focusing what's vital
   - Prepended and styled £ symbol for currency inset on `<input type="number">`. These guide the user in what to expect.
   - Formatting constraints on input for the number inputs for easy reading:
     - `10000.5055` -> `10,000.51`
-  - Remove default `0` values on number inputs and let the `placeholder`s be visible so the users can see exanple text
+  - Remove default `0` values on number inputs and let the `placeholder`s be visible so the users can see guidance text
   - Assistive: Add `aria-invalid`, `aria-describedby` (mapping to error text) on inputs for accessible field errors
   - Clear CSS transitions on background and `box-shadow` attributes to help give the user clues something is active under the mouse
 - Charts:
