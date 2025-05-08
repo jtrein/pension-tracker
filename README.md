@@ -14,8 +14,11 @@ npm test
 ### Charts
 - Add an x-axis label for `age` on the charts for pension growth and drawdown. I was having issues with the label clashing with the age's ticks, so I moved ahead.
 - Display a styled `Tooltip` label for `age` (e.g. `Age 30` instead of `30`) with good colour contrast on the white background
-- Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, it's generally cleaner to run them only when needed.
 - Move the charts to display to the right of the form on larger screens, only after the successful first and subsequent form submisions. On smaller screens, I'd stack the form and charts along the y-axis gradually.
+
+## Calculations
+- Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, it's generally cleaner to run them only when needed.
+- Improve the signature for the functions' parameters; perhaps by using a single object for improved readability (e.g. `calc({lots: '', of: '', data: ''})`)
 
 ### Write more comprehensive tests
 I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
