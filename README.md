@@ -17,7 +17,7 @@ npm test
 - Move the charts to display to the right of the form on larger screens, only after the successful first and subsequent form submisions. On smaller screens, I'd stack the form and charts along the y-axis gradually.
 
 ## Calculations
-- Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, it's generally cleaner to run them only when needed, especially in a smaller app where they're fast to calculate.
+- Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, I think it is cleaner to run them only when needed, especially in a smaller client app where they're fast to calculate.
 - Improve the signature for the functions' parameters; perhaps by using a single object for improved readability (e.g. `calc({lots: '', of: '', data: ''})`)
 
 ### Write more comprehensive tests
