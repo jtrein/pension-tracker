@@ -11,8 +11,11 @@ npm test
 ```
 
 ## What I'd do next
-### Calculations for chart data
+### Charts
+- Add an x-axis label for `age` on the charts for pension growth and drawdown. I was having issues with the label clashing with the age's ticks, so I moved ahead.
+- Display a styled `Tooltip` label for `age` (e.g. `Age 30` instead of `30`) with good colour contrast on the white background
 - Run the calculations only after form submit, when charts are ready to display. There's no performance issue at the moment running them in the function body during render; however, it's generally cleaner to run them only when needed.
+- Move the charts to display to the right of the form on larger screens, only after the successful first and subsequent form submisions. On smaller screens, I'd stack the form and charts along the y-axis gradually.
 
 ### Write more comprehensive tests
 I like to write tests first, or at least alongside development of a unit of code, but given the time I decided to leave it until the end.
@@ -33,8 +36,5 @@ Thanks for reviewing the assessment! It was fun to work on focusing what's vital
   - Clear CSS transitions on background and `box-shadow` attributes to help give the user clues something is active under the mouse
 - Charts:
   - Accessibile labels (at least) for charts for assistive tech and easier testing.
-  - A grid layout with 2 charts per row
-  - Graphs inside bounded "cards" with some depth (e.g. slight shadow)
-  - Improve styling of tooltip labels: The x axis value is too light on a white background.
-  - Use colours which play well with one another
+  - Use themed colours which play well with one another
 
