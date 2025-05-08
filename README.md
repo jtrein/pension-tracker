@@ -25,7 +25,7 @@ I like to write tests first, or at least alongside development of a unit of code
 
 ## Some notes on what I think is important, given more time
 
-Thanks for reviewing the assessment! It was fun to work on focusing what's vital in a limited span of time. I believe I was able to finsh the entire core of the task, with the *Stretch* items. Below are some items, with respect to the time alotted that I'd try and implement as I believe they're important.
+Thanks for reviewing the assessment! It was fun to work on and focus on what's vital in a limited span of time. I believe I was able to finsh the entire core of the task, with the *Stretch* items. Below are some items, with respect to the time alotted that I'd try and implement as I believe they're important.
 
 - Form fields
   - Prepended and styled £ symbol for currency inset on `<input type="number">`. These guide the user in what to expect.
